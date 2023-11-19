@@ -1,0 +1,11 @@
+[
+    {
+      "url": "/photo1.jpeg",
+      "description": "Description for Photo 1"
+    },
+    {
+      "url": "https://example.com/photo2.jpg",
+      "description": "Description for Photo 2"
+    }
+]
+  
