@@ -79,11 +79,25 @@ export const DetailContent = styled.div`
     .detailExtra {
         background-color: #ededed;
         height: 800px;
+        .enlarged {
+            transform: scale(1.1); 
+            transition: transform 0.2s ease;
+        }
         .carouselRow {
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
+            .hidden {
+                opacity: 0;
+                transform: translateY(-20px);
+                transition: opacity 0.3s ease, transform 0.5s ease;
+            }
+            .appear {
+                opacity: 1;
+                transform: translateY(0px);
+                transition: opacity 0.3s ease, transform 0.5s ease;
+            }
             .photoDesc {
                 display: flex;
                 padding: 0 32px;
@@ -104,7 +118,7 @@ export const DetailContent = styled.div`
                 }
             }
             .clickLeft, .clickRight {
-                transition: all 0.5s;
+                transition: opacity 0.5s;
             }
         }
     }

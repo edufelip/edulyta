@@ -17,7 +17,8 @@ function Home() {
   const [photos, setPhotos] = useState([]);
   const [currentPhoto, setCurrentPhoto] = useState({
     "url": "",
-    "description": ""
+    "description": "",
+    "subDescription": ""
   });
 
   useEffect(() => {
@@ -57,34 +58,63 @@ function Home() {
     fetchPhotos();
   }, [])
 
+  function animatePhoto() {
+    const container = document.querySelector(".photoDesc")
+    container.classList.remove('appear')
+    container.classList.add('hidden')
+    setTimeout(function() {
+      container.classList.add('appear');
+    }, 500);
+    setTimeout(function() {
+      container.classList.remove('hidden');
+    }, 500);
+  }
+
   function photoR() {
+    const buttonRight = document.querySelector(".clickRight")
+
+    buttonRight.classList.add('enlarged')
+    setTimeout(function() {
+      buttonRight.classList.remove('enlarged')
+    }, 200); 
+
     let goalIndex = photos.indexOf(currentPhoto) + 1
     let goalPhoto = photos[goalIndex]
     if (goalPhoto != null) {
-      setCurrentPhoto(goalPhoto)
+      animatePhoto()
       if (goalIndex == photos.length - 1) {
-        const button = document.querySelector(".clickRight")
-        button.style.opacity = '0';
+        buttonRight.style.opacity = '0';
       }
+      setTimeout(function() {
+        setCurrentPhoto(goalPhoto)
+      }, 500);
     }
 
-    const button = document.querySelector(".clickLeft")
-    button.style.opacity = '1';
+    const buttonLeft = document.querySelector(".clickLeft")
+    buttonLeft.style.opacity = '1';
   }
 
   function photoL() {
+    const buttonLeft = document.querySelector(".clickLeft")
+    buttonLeft.classList.add('enlarged')
+    setTimeout(function() {
+      buttonLeft.classList.remove('enlarged')
+    }, 200); 
+    
     let goalIndex = photos.indexOf(currentPhoto) - 1
     let goalPhoto = photos[goalIndex]
     if (goalPhoto != null) {
-      setCurrentPhoto(goalPhoto)
+      animatePhoto()
       if (goalIndex == 0) {
-        const button = document.querySelector(".clickLeft")
-        button.style.opacity = '0';
+        buttonLeft.style.opacity = '0';
       }
+      setTimeout(function() {
+        setCurrentPhoto(goalPhoto)
+      }, 500);
     }
 
-    const button = document.querySelector(".clickRight")
-    button.style.opacity = '1';
+    const buttonRight = document.querySelector(".clickRight")
+    buttonRight.style.opacity = '1';
   }
 
   return (
