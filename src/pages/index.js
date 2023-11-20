@@ -87,7 +87,7 @@ function Home() {
       }
       setTimeout(function() {
         setCurrentPhoto(goalPhoto)
-      }, 500);
+      }, 300);
     }
 
     const buttonLeft = document.querySelector(".clickLeft")
@@ -110,7 +110,7 @@ function Home() {
       }
       setTimeout(function() {
         setCurrentPhoto(goalPhoto)
-      }, 500);
+      }, 300);
     }
 
     const buttonRight = document.querySelector(".clickRight")
