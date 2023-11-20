@@ -30,7 +30,6 @@ export const DetailContent = styled.div`
     }
     .detailX {
         background-color: #ffcccc;
-        margin: 32px 0 0 0;
         .heartHolder {
             width: 100%;
             display: flex;
@@ -79,12 +78,33 @@ export const DetailContent = styled.div`
     }
     .detailExtra {
         background-color: #ededed;
+        height: 800px;
         .carouselRow {
             display: flex;
             flex-direction: row;
+            justify-content: center;
+            align-items: center;
             .photoDesc {
                 display: flex;
+                padding: 0 32px;
                 flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                img {
+                    height: 600px;
+                    width: 500px;
+                    object-fit: cover;
+                    border-radius: 20px;
+                }
+                h6 {
+                    margin: 16px 0;
+                    width: 500px;
+                    text-align: center;
+                    font-size: 16px;
+                }
+            }
+            .clickLeft, .clickRight {
+                transition: all 0.5s;
             }
         }
     }

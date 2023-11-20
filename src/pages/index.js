@@ -15,6 +15,10 @@ function Home() {
   const dispatch = useDispatch()
 
   const [photos, setPhotos] = useState([]);
+  const [currentPhoto, setCurrentPhoto] = useState({
+    "url": "",
+    "description": ""
+  });
 
   useEffect(() => {
     window.scroll({
@@ -37,20 +41,51 @@ function Home() {
       })
     })
 
+    document.querySelector(".clickLeft").style.opacity = '0'
+
     const fetchPhotos = async () => {
       try {
         const response = await fetch('/photos.json');
         const data = await response.json();
-        console.log(data)
         setPhotos(data);
+        setCurrentPhoto(data[0])
       } catch (error) {
         console.error('Error fetching photos:', error);
       }
     };
 
     fetchPhotos();
-
   }, [])
+
+  function photoR() {
+    let goalIndex = photos.indexOf(currentPhoto) + 1
+    let goalPhoto = photos[goalIndex]
+    if (goalPhoto != null) {
+      setCurrentPhoto(goalPhoto)
+      if (goalIndex == photos.length - 1) {
+        const button = document.querySelector(".clickRight")
+        button.style.opacity = '0';
+      }
+    }
+
+    const button = document.querySelector(".clickLeft")
+    button.style.opacity = '1';
+  }
+
+  function photoL() {
+    let goalIndex = photos.indexOf(currentPhoto) - 1
+    let goalPhoto = photos[goalIndex]
+    if (goalPhoto != null) {
+      setCurrentPhoto(goalPhoto)
+      if (goalIndex == 0) {
+        const button = document.querySelector(".clickLeft")
+        button.style.opacity = '0';
+      }
+    }
+
+    const button = document.querySelector(".clickRight")
+    button.style.opacity = '1';
+  }
 
   return (
     <motion.div 
@@ -115,12 +150,25 @@ function Home() {
             <div className="detail detailExtra">
               <h1>Momentos de Edulyta</h1>
               <div className='carouselRow'>
-                <BsArrowLeft />
+                <BsArrowLeft size={32} className='clickLeft' onClick={photoL}/> 
                 <div className='photoDesc'>
-                  <img src="{photos.url}"/>
-                  <p>{photos.description}</p>
+                  <img src={currentPhoto.url}/>
+                  <h6>{currentPhoto.description}</h6>
+                  <p>{currentPhoto.subDescription}</p>
                 </div>
-                <BsArrowRight />
+                <BsArrowRight size={32} className='clickRight' onClick={photoR}/>
+              </div>
+            </div>
+          </DetailContent>
+          <DetailContent>
+            <div className="detail detailX">
+              <div className="heartHolder start">
+                <img src="/love.ico" alt="corazaum" />
+              </div>
+              <h1>Você sabia ?</h1>
+              <p>Eduardo e Thalyta têm seus últimos nomes sendo "Santos", uma grandisíssima coincidência!</p>
+              <div className="heartHolder end">
+                <img src="/love.ico" alt="corazaum" />
               </div>
             </div>
           </DetailContent>

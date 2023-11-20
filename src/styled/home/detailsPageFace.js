@@ -7,4 +7,5 @@ export const DetailsPageFace = styled.div`
     height: 1000px;
     background-color: #ffffff;
     flex-direction: column;
+    padding: 16px 0;
 `
